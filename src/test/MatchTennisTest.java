@@ -4,13 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import constantes.TennisConstantes;
+
 import sports.MatchTennis;
 
 public class MatchTennisTest {
 	
-	private static final String DJOKOVIC = "Djokovic";
-	
-	private static final String MACENROE = "MacEnroe";
+
 
 	@Test
 	public void testGetScore() {
@@ -39,8 +39,8 @@ public class MatchTennisTest {
 	@Test
 	public void testJoueurAvecPlusHautScore() {
 		MatchTennis match = new MatchTennis();
-		assertEquals(DJOKOVIC, match.joueurAvecPlusHautScore(4, 2));
-		assertEquals(MACENROE, match.joueurAvecPlusHautScore(1, 5));
+		assertEquals(TennisConstantes.DJOKOVIC, match.joueurAvecPlusHautScore(4, 2));
+		assertEquals(TennisConstantes.MACENROE, match.joueurAvecPlusHautScore(1, 5));
 	}
 
 	@Test
