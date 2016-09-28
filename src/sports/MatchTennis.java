@@ -14,22 +14,26 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import constantes.TennisConstantes;
-import abstractClasse.SportAbstract;
+import abstractClasse.SportIndividuel;
 import abstractClasse.SportInterface;
+import constantes.SportConstantes;
+import constantes.TennisConstantes;
 
-public class MatchTennis extends SportAbstract implements SportInterface {
-	
+public class MatchTennis extends SportIndividuel implements SportInterface {
+
 	public MatchTennis() {
+
 	}
 
 	@Override
 	public String getScore(int pointDjokovic, int pointMacEnroe){
 		if(estEgalite(pointDjokovic, pointMacEnroe)){
-			return "Egalite";
+			return SportConstantes.EGALITE;
 		}
 		if(avantage(pointDjokovic, pointMacEnroe)){
-			return "Avantage " + joueurAvecPlusHautScore(pointDjokovic, pointMacEnroe);
+			return new StringBuilder().append(TennisConstantes.AVANTAGE)
+									  .append(" ")
+									  .append(joueurAvecPlusHautScore(pointDjokovic, pointMacEnroe)).toString();
 		}
 		if(estGagnant(pointDjokovic, pointMacEnroe)){
 			return "Jeu gagné par : " + joueurAvecPlusHautScore(pointDjokovic, pointMacEnroe);			
@@ -90,12 +94,12 @@ public class MatchTennis extends SportAbstract implements SportInterface {
 			throw new IllegalArgumentException("Paramètre invalide");
 		}
 	}
-	
+
 	public static File choixFichier() {
 		JFileChooser dialogue = new JFileChooser(new File("."));				
 		if (dialogue.showOpenDialog(null)== 
-		    JFileChooser.APPROVE_OPTION) {
-		    return dialogue.getSelectedFile();				    
+				JFileChooser.APPROVE_OPTION) {
+			return dialogue.getSelectedFile();				    
 		}
 		return null;
 	}
@@ -104,10 +108,10 @@ public class MatchTennis extends SportAbstract implements SportInterface {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		int pointMacEnroe = 0;
 		int pointDjokovic = 0;
-		
+
 		FileInputStream fichierScoreEntree;
 
 		JTextPane textPane = new JTextPane();
@@ -124,7 +128,7 @@ public class MatchTennis extends SportAbstract implements SportInterface {
 		StyleConstants.setFontFamily(style_normal, "Calibri");
 		StyleConstants.setFontSize(style_normal, 14);
 		SportInterface match = new MatchTennis();
-		
+
 		File fichier = choixFichier();
 
 		try {
@@ -144,7 +148,7 @@ public class MatchTennis extends SportAbstract implements SportInterface {
 					} else if (TennisConstantes.MACENROE.equals(ligne)){
 						pointMacEnroe ++;						
 					}
-					
+
 					textPane.getStyledDocument().insertString(textPane.getStyledDocument().getLength(), match.getScore(pointDjokovic, pointMacEnroe)+"\n", style_normal);
 
 				}

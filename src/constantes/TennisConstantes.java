@@ -13,5 +13,7 @@ public class TennisConstantes {
 	public static final String TRENTE = "30";
 	
 	public static final String QUARANTE = "40";
+	
+	public static final String AVANTAGE = "Avantage";
 
 }
