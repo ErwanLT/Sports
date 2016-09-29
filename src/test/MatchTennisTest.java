@@ -15,8 +15,8 @@ public class MatchTennisTest {
 	@Test
 	public void testGetScore() {
 		MatchTennis match = new MatchTennis();
-		assertEquals("Jeu gagné par : Djokovic",match.getScore(8, 6));
-		assertEquals("Jeu gagné par : MacEnroe",match.getScore(4, 8));
+		assertEquals("Jeu gagnÃ© par : Djokovic",match.getScore(8, 6));
+		assertEquals("Jeu gagnÃ© par : MacEnroe",match.getScore(4, 8));
 		assertEquals("Egalite",match.getScore(6, 6));
 		assertEquals("Avantage MacEnroe",match.getScore(5, 6));
 		assertEquals("Avantage Djokovic",match.getScore(6, 5));
@@ -68,16 +68,16 @@ public class MatchTennisTest {
 			try{
 				match.traiterPoint(i);
 				if(i==0){
-					assertEquals("0",match.traiterPoint(i));
+					assertEquals(TennisConstante.ZERO,match.traiterPoint(i));
 				}else if(i==1){
-					assertEquals("15",match.traiterPoint(i));
+					assertEquals(TennisConstante.QUINZE,match.traiterPoint(i));
 				} else if(i==2){
-					assertEquals("30",match.traiterPoint(i));
+					assertEquals(TennisConstante.TRENTE,match.traiterPoint(i));
 				} else if(i==3){
-					assertEquals("40",match.traiterPoint(i));
+					assertEquals(TennisConstante.QUARANTE,match.traiterPoint(i));
 				}
 			} catch (IllegalArgumentException e){
-				assertEquals("Paramètre invalide", e.getMessage());
+				assertEquals("ParamÃ¨tre invalide", e.getMessage());
 			}
 			
 		}
