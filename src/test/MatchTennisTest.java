@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import constantes.TennisConstantes;
+import constantes.SportConstantes;
 
 import sports.MatchTennis;
 
@@ -17,7 +18,7 @@ public class MatchTennisTest {
 		MatchTennis match = new MatchTennis();
 		assertEquals("Jeu gagné par : Djokovic",match.getScore(8, 6));
 		assertEquals("Jeu gagné par : MacEnroe",match.getScore(4, 8));
-		assertEquals("Egalite",match.getScore(6, 6));
+		assertEquals(SportConstante.EGALITE,match.getScore(6, 6));
 		assertEquals("Avantage MacEnroe",match.getScore(5, 6));
 		assertEquals("Avantage Djokovic",match.getScore(6, 5));
 		assertEquals("15A",match.getScore(1, 1));
