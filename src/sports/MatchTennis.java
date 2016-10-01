@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -18,6 +17,7 @@ import abstractClasse.SportIndividuel;
 import abstractClasse.SportInterface;
 import constantes.SportConstantes;
 import constantes.TennisConstantes;
+import fichiers.SelectionFichier;
 
 public class MatchTennis extends SportIndividuel implements SportInterface {
 
@@ -71,6 +71,7 @@ public class MatchTennis extends SportIndividuel implements SportInterface {
 		return false;
 	}
 
+	@Override
 	public String joueurAvecPlusHautScore(int pointDjokovic, int pointMacEnroe) {
 		if (pointDjokovic > pointMacEnroe) {
 			return TennisConstantes.DJOKOVIC;
@@ -93,15 +94,6 @@ public class MatchTennis extends SportIndividuel implements SportInterface {
 		default:
 			throw new IllegalArgumentException("Paramètre invalide");
 		}
-	}
-
-	public static File choixFichier() {
-		JFileChooser dialogue = new JFileChooser(new File("."));				
-		if (dialogue.showOpenDialog(null)== 
-				JFileChooser.APPROVE_OPTION) {
-			return dialogue.getSelectedFile();				    
-		}
-		return null;
 	}
 
 	/**
@@ -129,7 +121,7 @@ public class MatchTennis extends SportIndividuel implements SportInterface {
 		StyleConstants.setFontSize(style_normal, 14);
 		SportInterface match = new MatchTennis();
 
-		File fichier = choixFichier();
+		File fichier = SelectionFichier.choixFichierTxt();
 
 		try {
 

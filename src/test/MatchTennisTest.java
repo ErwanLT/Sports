@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import constantes.TennisConstantes;
 import constantes.SportConstantes;
+import constantes.TennisConstantes;
 
 import sports.MatchTennis;
 
@@ -16,9 +16,9 @@ public class MatchTennisTest {
 	@Test
 	public void testGetScore() {
 		MatchTennis match = new MatchTennis();
-		assertEquals("Jeu gagnÃ© par : Djokovic",match.getScore(8, 6));
-		assertEquals("Jeu gagnÃ© par : MacEnroe",match.getScore(4, 8));
-		assertEquals(SportConstante.EGALITE,match.getScore(6, 6));
+		assertEquals("Jeu gagné par : Djokovic",match.getScore(8, 6));
+		assertEquals("Jeu gagné par : MacEnroe",match.getScore(4, 8));
+		assertEquals(SportConstantes.EGALITE,match.getScore(6, 6));
 		assertEquals("Avantage MacEnroe",match.getScore(5, 6));
 		assertEquals("Avantage Djokovic",match.getScore(6, 5));
 		assertEquals("15A",match.getScore(1, 1));
@@ -69,16 +69,16 @@ public class MatchTennisTest {
 			try{
 				match.traiterPoint(i);
 				if(i==0){
-					assertEquals(TennisConstante.ZERO,match.traiterPoint(i));
+					assertEquals(TennisConstantes.ZERO,match.traiterPoint(i));
 				}else if(i==1){
-					assertEquals(TennisConstante.QUINZE,match.traiterPoint(i));
+					assertEquals(TennisConstantes.QUINZE,match.traiterPoint(i));
 				} else if(i==2){
-					assertEquals(TennisConstante.TRENTE,match.traiterPoint(i));
+					assertEquals(TennisConstantes.TRENTE,match.traiterPoint(i));
 				} else if(i==3){
-					assertEquals(TennisConstante.QUARANTE,match.traiterPoint(i));
+					assertEquals(TennisConstantes.QUARANTE,match.traiterPoint(i));
 				}
 			} catch (IllegalArgumentException e){
-				assertEquals("ParamÃ¨tre invalide", e.getMessage());
+				assertEquals("Paramètre invalide", e.getMessage());
 			}
 			
 		}
