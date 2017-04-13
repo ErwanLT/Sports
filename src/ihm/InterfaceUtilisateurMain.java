@@ -143,6 +143,9 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 			case "Tennis" :
 				log.append(TraitementSport.traitementTennis(fichier) + newline);
 				break;
+			case "Handball":
+				log.append(TraitementSport.traitementHandball(fichier) + newline);
+				break;
 			default :
 				break;
 		}

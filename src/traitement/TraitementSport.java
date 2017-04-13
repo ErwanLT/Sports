@@ -11,6 +11,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+import athlete.JoueurHandball;
 import athlete.JoueurTennis;
 import sports.MatchTennis;
 
@@ -45,7 +52,7 @@ public class TraitementSport {
 			matchTennis.setJoueur1(athlete1);
 			matchTennis.setJoueur2(athlete2);
 			
-			for(String nom : listJoueur){
+			match : for(String nom : listJoueur){
 				if(athlete1.getNom().equals(nom)){
 					 matchTennis.setScoreJoueur1(matchTennis.getScoreJoueur1()+1);					
 				} else if (athlete2.getNom().equals(nom)){
@@ -53,12 +60,12 @@ public class TraitementSport {
 				}
 
 				resultat = resultat +matchTennis.getScore(matchTennis.getScoreJoueur1(), matchTennis.getScoreJoueur2())+"\n";
+				if(matchTennis.isEstTermine()){
+					break match;
+				}
 			}
 			br.close(); 
 			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,4 +74,55 @@ public class TraitementSport {
 		return resultat;
 	}
 
+	public static String traitementHandball(File fichier) {
+		String resultat = "";
+		
+		List<JoueurHandball> equipe1 = new ArrayList<JoueurHandball>();
+		List<JoueurHandball> equipe2 = new ArrayList<JoueurHandball>();
+		
+		try{
+			final Workbook classeurExcel = WorkbookFactory.create(fichier);
+			final Sheet feuilleEquipe1 = classeurExcel.getSheet("Equipe_1");
+			final Sheet feuilleEquipe2 = classeurExcel.getSheet("Equipe_2");
+			final Sheet feuilleScore = classeurExcel.getSheet("Score");
+			
+			int index = 1;
+			Row lignesEquipe1 = feuilleEquipe1.getRow(index++);
+			
+			while (lignesEquipe1 != null) {
+
+	            final JoueurHandball joueur = rowToJoueur(lignesEquipe1);
+	            equipe1.add(joueur);
+
+	            lignesEquipe1 = feuilleEquipe1.getRow(index++);
+	        }
+			index = 1;
+			Row lignesEquipe2 = feuilleEquipe1.getRow(index++);
+			while (lignesEquipe2 != null) {
+
+	            final JoueurHandball joueur = rowToJoueur(lignesEquipe2);
+	            equipe2.add(joueur);
+
+	            lignesEquipe2 = feuilleEquipe1.getRow(index++);
+	        }
+			
+			
+			
+		} catch (InvalidFormatException | IOException e) {
+	        e.printStackTrace();
+	    }
+		
+		return resultat;
+	}
+
+	private static JoueurHandball rowToJoueur(final Row row) {
+		
+		JoueurHandball joueur = new JoueurHandball();
+		joueur.setNom(row.getCell(0).getStringCellValue());
+		joueur.setPoste(row.getCell(1).getStringCellValue());
+		joueur.setNumero((int) row.getCell(2).getNumericCellValue());
+		
+		return joueur;
+	    
+	}
 }

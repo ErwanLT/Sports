@@ -8,19 +8,17 @@ import constante.TennisConstante;
 public class MatchTennis extends SportIndividuel{
 	
 	public MatchTennis() {
-		this.joueur1 = new JoueurTennis();
-		this.joueur2 = new JoueurTennis();
+		super();
+		setEstTermine(false);
 	}
 
-	private static final String NOM_SPORT = "Tennis";
-	
-	private JoueurTennis joueur1;
-	
-	private JoueurTennis joueur2;
+	private static final String NOM_SPORT = TennisConstante.NOM_SPORT;
 	
 	private int scoreJoueur1;
 	
 	private int scoreJoueur2;
+
+	private boolean estTermine;
 
 	public Athlete getJoueur1() {
 		return joueur1;
@@ -58,6 +56,15 @@ public class MatchTennis extends SportIndividuel{
 		return NOM_SPORT;
 	}
 	
+	public boolean isEstTermine() {
+		return estTermine;
+	}
+
+	public void setEstTermine(boolean estTermine) {
+		this.estTermine = estTermine;
+	}
+	
+	
 	@Override
 	public String getScore(int score1, int score2) {
 		if(estEgalite(score1, score2)){
@@ -84,6 +91,7 @@ public class MatchTennis extends SportIndividuel{
 			score.append("Score : \n");
 			score.append(this.joueur1.getNombreJeu() + " jeu à "+this.joueur2.getNombreJeu() +" pour "+joueurAvecPlusHautScore(score1, score2)+"\n");
 			score.append(traitementSet());
+			score.append(estMatchTermine());
 			return score.toString();
 		}
 		if (score1 == score2 && score1 !=0){
@@ -93,18 +101,31 @@ public class MatchTennis extends SportIndividuel{
 		return traiterPoint(score1) + " - " + traiterPoint(score2);
 	}
 
+	private String estMatchTermine() {
+		int nombreSetTotal = joueur1.getNombreSet() + joueur2.getNombreSet();
+		if(nombreSetTotal >= 3 && joueur1.getNombreSet()>= joueur2.getNombreSet()+2){
+			this.setEstTermine(true);
+			return "match gagné par : " + joueur1.getNom()+"\n";
+		}
+		if(nombreSetTotal >= 3 && joueur2.getNombreSet()>= joueur1.getNombreSet()+2){
+			this.setEstTermine(true);
+			return "match gagné par : " + joueur2.getNom()+"\n";
+		}
+		return "";
+	}
+
 	private String traitementSet() {
 		if(estSetGagneJoueur1(joueur1.getNombreJeu(), joueur2.getNombreJeu())){
 			joueur1.setNombreJeu(0);
 			joueur2.setNombreJeu(0);
 			joueur1.setNombreSet(joueur1.getNombreSet()+1);
-			return "Set gagné par : " + joueur1.getNom();
+			return "Set gagné par : " + joueur1.getNom()+"\n";
 		}
 		if(estSetGagneJoueur2(joueur1.getNombreJeu(), joueur2.getNombreJeu())){
 			joueur1.setNombreJeu(0);
 			joueur2.setNombreJeu(0);
 			joueur2.setNombreSet(joueur2.getNombreSet()+1);
-			return "Set gagné par : " + joueur2.getNom();
+			return "Set gagné par : " + joueur2.getNom()+"\n";
 		}
 		return "";
 	}
@@ -180,7 +201,5 @@ public class MatchTennis extends SportIndividuel{
 		default:
 			throw new IllegalArgumentException("Paramètre invalide");
 		}
-	}
-	
-	
+	}	
 }

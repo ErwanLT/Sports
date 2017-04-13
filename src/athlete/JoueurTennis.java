@@ -2,9 +2,9 @@ package athlete;
 
 public class JoueurTennis extends Athlete {
 	
-	int nombreJeu;
+	private int nombreJeu;
 	
-	int nombreSet;
+	private int nombreSet;
 
 	public JoueurTennis() {
 		super.setNom("");
