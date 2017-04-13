@@ -90,23 +90,17 @@ public class TraitementSport {
 			Row lignesEquipe1 = feuilleEquipe1.getRow(index++);
 			
 			while (lignesEquipe1 != null) {
-
-	            final JoueurHandball joueur = rowToJoueur(lignesEquipe1);
-	            equipe1.add(joueur);
-
-	            lignesEquipe1 = feuilleEquipe1.getRow(index++);
-	        }
+	            		final JoueurHandball joueur = rowToJoueur(lignesEquipe1);
+	            		equipe1.add(joueur);
+	            		lignesEquipe1 = feuilleEquipe1.getRow(index++);
+	        	}
 			index = 1;
 			Row lignesEquipe2 = feuilleEquipe1.getRow(index++);
 			while (lignesEquipe2 != null) {
-
-	            final JoueurHandball joueur = rowToJoueur(lignesEquipe2);
-	            equipe2.add(joueur);
-
-	            lignesEquipe2 = feuilleEquipe1.getRow(index++);
-	        }
-			
-			
+	            		final JoueurHandball joueur = rowToJoueur(lignesEquipe2);
+	            		equipe2.add(joueur);
+	            		lignesEquipe2 = feuilleEquipe1.getRow(index++);
+	        	}
 			
 		} catch (InvalidFormatException | IOException e) {
 	        e.printStackTrace();
