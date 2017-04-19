@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+1eimport org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,7 +21,7 @@ import athlete.JoueurHandball;
 import athlete.JoueurTennis;
 import sports.MatchTennis;
 
-public class TraitementSport {
+eppublic class TraitementSport {
 
 	public static String traitementTennis(File fichier) {
 
@@ -49,6 +49,7 @@ public class TraitementSport {
 	        	athlete2.setNom(distinctListNomJoueur.get(1).toString());
 	        }
 
+			
 			matchTennis.setJoueur1(athlete1);
 			matchTennis.setJoueur2(athlete2);
 			
@@ -86,21 +87,8 @@ public class TraitementSport {
 			final Sheet feuilleEquipe2 = classeurExcel.getSheet("Equipe_2");
 			final Sheet feuilleScore = classeurExcel.getSheet("Score");
 			
-			int index = 1;
-			Row lignesEquipe1 = feuilleEquipe1.getRow(index++);
-			
-			while (lignesEquipe1 != null) {
-	            		final JoueurHandball joueur = rowToJoueur(lignesEquipe1);
-	            		equipe1.add(joueur);
-	            		lignesEquipe1 = feuilleEquipe1.getRow(index++);
-	        	}
-			index = 1;
-			Row lignesEquipe2 = feuilleEquipe1.getRow(index++);
-			while (lignesEquipe2 != null) {
-	            		final JoueurHandball joueur = rowToJoueur(lignesEquipe2);
-	            		equipe2.add(joueur);
-	            		lignesEquipe2 = feuilleEquipe1.getRow(index++);
-	        	}
+			equipe1 = getEquipe(feuilleEquipe1);
+			equipe2 = getEquipe(feuilleEquipe2);
 			
 		} catch (InvalidFormatException | IOException e) {
 	        e.printStackTrace();
@@ -118,5 +106,17 @@ public class TraitementSport {
 		
 		return joueur;
 	    
+	}
+	
+	private static List<JoueurHandball> getEquipe(final sheet){
+		List<JoueurHandball> equipe = new ArrayList<JoueurHandball>();
+		int index = 1;
+		Row lignesEquipe = sheet.getRow(index++);
+		while (lignesEquipe != null) {
+			final JoueurHandball joueur = rowToJoueur(lignesEquipe);
+			equipe.add(joueur);
+			lignesEquipe = sheet.getRow(index++);
+	        }
+		return equipe
 	}
 }
