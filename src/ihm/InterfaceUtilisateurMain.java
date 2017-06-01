@@ -17,7 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import constante.SportConstante;
 import traitement.TraitementSport;
@@ -47,8 +46,8 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 
 		//Create a file chooser
 		choixFichier = new JFileChooser();
-		FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers texte.", "txt");
-		choixFichier.setFileFilter(filtre);
+		/*FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers texte.", "txt");
+		choixFichier.setFileFilter(filtre);*/
 		choixFichier.setAcceptAllFileFilterUsed(false);
 		choixFichier.setDialogTitle("Importation fichier texte match");
 
@@ -141,15 +140,31 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 	private void lancerTraitement() {
 		switch(listeDeroulanteSport.getSelectedItem().toString()){
 			case "Tennis" :
-				log.append(TraitementSport.traitementTennis(fichier) + newline);
+				if(".txt".equals(getExtensionFile())){
+					log.append(TraitementSport.traitementTennis(fichier) + newline);
+				} else {
+					log.append("mauvais format de fichier, selectionné un fichier .txt");
+				}
 				break;
 			case "Handball":
-				log.append(TraitementSport.traitementHandball(fichier) + newline);
+				if(".xls".equals(getExtensionFile()) || ".xlsx".equals(getExtensionFile())){
+					log.append(TraitementSport.traitementHandball(fichier) + newline);
+				} else {
+					log.append("mauvais format de fichier, selectionné un fichier .xls ou .xlsx");
+				}
 				break;
 			default :
 				break;
 		}
 		
+	}
+
+	private Object getExtensionFile() {
+		String nomFichier = fichier.getName();
+		String ext = nomFichier.substring(nomFichier.lastIndexOf("." ));
+
+		
+		return ext;
 	}
 
 }

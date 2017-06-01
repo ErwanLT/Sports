@@ -3,7 +3,6 @@ package traitement;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-1eimport org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -19,9 +18,10 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import athlete.JoueurHandball;
 import athlete.JoueurTennis;
+import sports.MatchHandball;
 import sports.MatchTennis;
 
-eppublic class TraitementSport {
+public class TraitementSport {
 
 	public static String traitementTennis(File fichier) {
 
@@ -49,7 +49,6 @@ eppublic class TraitementSport {
 	        	athlete2.setNom(distinctListNomJoueur.get(1).toString());
 	        }
 
-			
 			matchTennis.setJoueur1(athlete1);
 			matchTennis.setJoueur2(athlete2);
 			
@@ -68,7 +67,6 @@ eppublic class TraitementSport {
 			br.close(); 
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -80,6 +78,7 @@ eppublic class TraitementSport {
 		
 		List<JoueurHandball> equipe1 = new ArrayList<JoueurHandball>();
 		List<JoueurHandball> equipe2 = new ArrayList<JoueurHandball>();
+		List<String> listePoint = new ArrayList<String>();
 		
 		try{
 			final Workbook classeurExcel = WorkbookFactory.create(fichier);
@@ -87,8 +86,20 @@ eppublic class TraitementSport {
 			final Sheet feuilleEquipe2 = classeurExcel.getSheet("Equipe_2");
 			final Sheet feuilleScore = classeurExcel.getSheet("Score");
 			
-			equipe1 = getEquipe(feuilleEquipe1);
-			equipe2 = getEquipe(feuilleEquipe2);
+			int index = 1;
+			equipe1 = feuilleToEquipe(feuilleEquipe1);
+			equipe2 = feuilleToEquipe(feuilleEquipe2);
+			
+			Row lignePoint = feuilleScore.getRow(index++);
+			while(lignePoint != null){
+				listePoint.add(lignePoint.getCell(0).getStringCellValue());
+				lignePoint = feuilleScore.getRow(index++);
+			}
+			
+			MatchHandball match = new MatchHandball();
+			match.setEquipe1(equipe1);
+			match.setEquipe2(equipe2);
+			
 			
 		} catch (InvalidFormatException | IOException e) {
 	        e.printStackTrace();
@@ -108,15 +119,20 @@ eppublic class TraitementSport {
 	    
 	}
 	
-	private static List<JoueurHandball> getEquipe(final sheet){
+	private static List<JoueurHandball> feuilleToEquipe(final Sheet sheet){
 		List<JoueurHandball> equipe = new ArrayList<JoueurHandball>();
 		int index = 1;
 		Row lignesEquipe = sheet.getRow(index++);
+		
 		while (lignesEquipe != null) {
-			final JoueurHandball joueur = rowToJoueur(lignesEquipe);
-			equipe.add(joueur);
-			lignesEquipe = sheet.getRow(index++);
-	        }
-		return equipe
+
+            final JoueurHandball joueur = rowToJoueur(lignesEquipe);
+            equipe.add(joueur);
+
+            lignesEquipe = sheet.getRow(index++);
+        }
+		
+		return equipe;
+	 
 	}
 }

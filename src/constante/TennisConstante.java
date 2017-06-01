@@ -1,9 +1,7 @@
 package constante;
 
 public class TennisConstante {
-	
-	public static final String NOM_SPORT = "Tennis";
-	
+		
 	public static final String ZERO = "0";
 	
 	public static final String QUINZE = "15";

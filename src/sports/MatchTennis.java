@@ -12,13 +12,17 @@ public class MatchTennis extends SportIndividuel{
 		setEstTermine(false);
 	}
 
-	private static final String NOM_SPORT = TennisConstante.NOM_SPORT;
+	private static final String NOM_SPORT = SportConstante.TENNIS;
 	
 	private int scoreJoueur1;
 	
 	private int scoreJoueur2;
 
 	private boolean estTermine;
+	
+	protected JoueurTennis joueur1;
+	
+	protected JoueurTennis joueur2;
 
 	public Athlete getJoueur1() {
 		return joueur1;
