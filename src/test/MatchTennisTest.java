@@ -25,10 +25,10 @@ public class MatchTennisTest {
 		assertEquals("Le nom du sportif est : Amelie", match.getJoueur2().toString());
 		match.setScoreJoueur1(8);
 		match.setScoreJoueur2(6);
-		assertEquals("Jeu gagné par : Erwan\nScore : \n1 jeu à 0 pour Erwan\n",match.getScore(8, 6));
+		assertEquals("Jeu gagnÃ© par : Erwan\nScore : \n1 jeu Ã  0 pour Erwan\n",match.getScore(8, 6));
 		match.setScoreJoueur1(4);
 		match.setScoreJoueur2(8);
-		assertEquals("Jeu gagné par : Amelie\nScore : \n1 jeu à 1 pour Amelie\n",match.getScore(4, 8));
+		assertEquals("Jeu gagnÃ© par : Amelie\nScore : \n1 jeu Ã  1 pour Amelie\n",match.getScore(4, 8));
 		match.setScoreJoueur1(6);
 		match.setScoreJoueur2(6);
 		assertEquals(6, match.getScoreJoueur1());
@@ -115,7 +115,7 @@ public class MatchTennisTest {
 					assertEquals(TennisConstante.QUARANTE,match.traiterPoint(i));
 				}
 			} catch (IllegalArgumentException e){
-				assertEquals("Paramètre invalide", e.getMessage());
+				assertEquals("ParamÃ¨tre invalide", e.getMessage());
 			}
 			
 		}

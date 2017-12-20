@@ -49,7 +49,7 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 		/*FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers texte.", "txt");
 		choixFichier.setFileFilter(filtre);*/
 		choixFichier.setAcceptAllFileFilterUsed(false);
-		choixFichier.setDialogTitle("Importation fichier texte match");
+		choixFichier.setDialogTitle("Importation fichier match");
 
 		cheminFichier = new JTextField();
 		cheminFichier.setColumns(30);
@@ -114,16 +114,20 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				fichier = choixFichier.getSelectedFile();
-				cheminFichier.setText(fichier.getPath());
+				if(fichier.isDirectory()){
+					log.append("Erreur, il s'agit d'un rÃ©petoire." + newline);
+				} else {
+					cheminFichier.setText(fichier.getPath());
+				}				
 			} else {
-				log.append("Open command cancelled by user." + newline);
+				log.append("OpÃ©ration annulÃ©e par l'utilisateur." + newline);
 			}
 			log.setCaretPosition(log.getDocument().getLength());
 		} else if(e.getSource() == traitementButton){
 			log.setText("");
 			if(!cheminFichier.getText().equals("")){
 				if(!listeDeroulanteSport.getSelectedItem().toString().equals("")){
-					log.append("début traitement calcul des scores ..." + newline);
+					log.append("dÃ©but traitement calcul des scores ..." + newline);
 					lancerTraitement();
 				} else {
 					log.append("merci de selectionner un sport avant d'essayer de lancer un traitement" + newline);
@@ -143,14 +147,14 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 				if(".txt".equals(getExtensionFile())){
 					log.append(TraitementSport.traitementTennis(fichier) + newline);
 				} else {
-					log.append("mauvais format de fichier, selectionné un fichier .txt");
+					log.append("mauvais format de fichier, selectionnï¿½ un fichier .txt");
 				}
 				break;
 			case "Handball":
 				if(".xls".equals(getExtensionFile()) || ".xlsx".equals(getExtensionFile())){
 					log.append(TraitementSport.traitementHandball(fichier) + newline);
 				} else {
-					log.append("mauvais format de fichier, selectionné un fichier .xls ou .xlsx");
+					log.append("mauvais format de fichier, selectionnï¿½ un fichier .xls ou .xlsx");
 				}
 				break;
 			default :

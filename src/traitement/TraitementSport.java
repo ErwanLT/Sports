@@ -26,7 +26,7 @@ public class TraitementSport {
 	public static String traitementTennis(File fichier) {
 
 		
-		String resultat = new String();
+		StringBuilder resultat = new StringBuilder();
 		InputStreamReader ipsr;
 		try {
 			ipsr = new InputStreamReader(new FileInputStream(fichier));
@@ -59,7 +59,7 @@ public class TraitementSport {
 					matchTennis.setScoreJoueur2(matchTennis.getScoreJoueur2()+1);						
 				}
 
-				resultat = resultat +matchTennis.getScore(matchTennis.getScoreJoueur1(), matchTennis.getScoreJoueur2())+"\n";
+				resultat = resultat.append(matchTennis.getScore(matchTennis.getScoreJoueur1(), matchTennis.getScoreJoueur2())).append("\n");
 				if(matchTennis.isEstTermine()){
 					break match;
 				}
@@ -70,11 +70,14 @@ public class TraitementSport {
 			e.printStackTrace();
 		}
 		
-		return resultat;
+		return resultat.toString();
 	}
 
 	public static String traitementHandball(File fichier) {
 		String resultat = "";
+		
+		int scoreEquipe1 = 0;
+		int scoreEquipe2 = 0;
 		
 		List<JoueurHandball> equipe1 = new ArrayList<JoueurHandball>();
 		List<JoueurHandball> equipe2 = new ArrayList<JoueurHandball>();
@@ -100,6 +103,19 @@ public class TraitementSport {
 			match.setEquipe1(equipe1);
 			match.setEquipe2(equipe2);
 			
+			List<String> listJoueurEquipe1 = match.getListJoueurEquipe1();
+			List<String> listJoueurEquipe2 = match.getListJoueurEquipe2();
+			
+			for (String joueurMarquant : listePoint) {
+				if (listJoueurEquipe1.contains(joueurMarquant)) {
+					scoreEquipe1++;
+				} else if(listJoueurEquipe2.contains(joueurMarquant)) {
+					scoreEquipe2++;
+				}
+			}
+			StringBuilder rslt = new StringBuilder("Le résultat du match est de :\n")
+					.append(match.getScore(scoreEquipe1, scoreEquipe2));
+			resultat = rslt.toString();
 			
 		} catch (InvalidFormatException | IOException e) {
 	        e.printStackTrace();
@@ -119,18 +135,14 @@ public class TraitementSport {
 	    
 	}
 	
+	
+	
 	private static List<JoueurHandball> feuilleToEquipe(final Sheet sheet){
 		List<JoueurHandball> equipe = new ArrayList<JoueurHandball>();
-		int index = 1;
-		Row lignesEquipe = sheet.getRow(index++);
 		
-		while (lignesEquipe != null) {
-
-            final JoueurHandball joueur = rowToJoueur(lignesEquipe);
-            equipe.add(joueur);
-
-            lignesEquipe = sheet.getRow(index++);
-        }
+		for(Row row : sheet) {
+	         equipe.add(rowToJoueur(row));
+		}
 		
 		return equipe;
 	 

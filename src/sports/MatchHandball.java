@@ -1,5 +1,6 @@
 package sports;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import athlete.JoueurHandball;
@@ -44,9 +45,9 @@ public class MatchHandball extends SportEquipe {
 	@Override
 	protected String equipeAvecPlusHautScore(int scoreJoueur1, int scoreJoueur2) {
 		if (scoreEquipe1 > scoreEquipe2) {
-			return "l'équipe 1 à le plus haut score";
+			return "l'ï¿½quipe 1 ï¿½ le plus haut score";
 		} else {
-			return "l'équipe 2 à le plus haut score";
+			return "l'ï¿½quipe 2 ï¿½ le plus haut score";
 		}
 	}
 
@@ -64,6 +65,30 @@ public class MatchHandball extends SportEquipe {
 
 	public void setScoreEquipe2(int scoreEquipe2) {
 		this.scoreEquipe2 = scoreEquipe2;
+	}
+	
+	@Override
+	public String getScore(int score1, int score2) {
+		return("Score equipe1 : " + score1 + " :: Score equipe2 : " + score2);
+	}
+	
+
+	public List<String> getListJoueurEquipe1() {
+		List<String> list = new ArrayList<>();
+		for (JoueurHandball joueurHandball : equipe1) {
+			list.add(joueurHandball.getNom());
+		}
+		
+		return list;
+	}
+	
+	public List<String> getListJoueurEquipe2() {
+		List<String> list = new ArrayList<>();
+		for (JoueurHandball joueurHandball : equipe2) {
+			list.add(joueurHandball.getNom());
+		}
+		
+		return list;
 	}
 
 }

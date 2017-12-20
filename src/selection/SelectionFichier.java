@@ -7,7 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SelectionFichier {
 	
-	public static File choixFichierTxt() {
+	public static File choixFichier() {
 		FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers texte.", "txt");
 		JFileChooser dialogue = new JFileChooser(new File("."));
 		dialogue.setFileFilter(filtre);

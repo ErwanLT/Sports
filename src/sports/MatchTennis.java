@@ -91,9 +91,9 @@ public class MatchTennis extends SportIndividuel{
 				this.scoreJoueur2 = 0;
 				this.joueur2.setNombreJeu(this.joueur2.getNombreJeu()+1);
 			}
-			score.append("Jeu gagné par : " + joueurAvecPlusHautScore(score1, score2)+"\n");
+			score.append("Jeu gagnÃ© par : " + joueurAvecPlusHautScore(score1, score2)+"\n");
 			score.append("Score : \n");
-			score.append(this.joueur1.getNombreJeu() + " jeu à "+this.joueur2.getNombreJeu() +" pour "+joueurAvecPlusHautScore(score1, score2)+"\n");
+			score.append(this.joueur1.getNombreJeu() + " jeu Ã  "+this.joueur2.getNombreJeu() +" pour "+joueurAvecPlusHautScore(score1, score2)+"\n");
 			score.append(traitementSet());
 			score.append(estMatchTermine());
 			return score.toString();
@@ -109,11 +109,11 @@ public class MatchTennis extends SportIndividuel{
 		int nombreSetTotal = joueur1.getNombreSet() + joueur2.getNombreSet();
 		if(nombreSetTotal >= 3 && joueur1.getNombreSet()>= joueur2.getNombreSet()+2){
 			this.setEstTermine(true);
-			return "match gagné par : " + joueur1.getNom()+"\n";
+			return "match gagnÃ© par : " + joueur1.getNom()+"\n";
 		}
 		if(nombreSetTotal >= 3 && joueur2.getNombreSet()>= joueur1.getNombreSet()+2){
 			this.setEstTermine(true);
-			return "match gagné par : " + joueur2.getNom()+"\n";
+			return "match gagnÃ© par : " + joueur2.getNom()+"\n";
 		}
 		return "";
 	}
@@ -123,13 +123,13 @@ public class MatchTennis extends SportIndividuel{
 			joueur1.setNombreJeu(0);
 			joueur2.setNombreJeu(0);
 			joueur1.setNombreSet(joueur1.getNombreSet()+1);
-			return "Set gagné par : " + joueur1.getNom()+"\n";
+			return "Set gagnÃ© par : " + joueur1.getNom()+"\n";
 		}
 		if(estSetGagneJoueur2(joueur1.getNombreJeu(), joueur2.getNombreJeu())){
 			joueur1.setNombreJeu(0);
 			joueur2.setNombreJeu(0);
 			joueur2.setNombreSet(joueur2.getNombreSet()+1);
-			return "Set gagné par : " + joueur2.getNom()+"\n";
+			return "Set gagnÃ© par : " + joueur2.getNom()+"\n";
 		}
 		return "";
 	}
@@ -203,7 +203,7 @@ public class MatchTennis extends SportIndividuel{
 		case 3:
 			return TennisConstante.QUARANTE;
 		default:
-			throw new IllegalArgumentException("Paramètre invalide");
+			throw new IllegalArgumentException("ParamÃ¨tre invalide");
 		}
 	}	
 }

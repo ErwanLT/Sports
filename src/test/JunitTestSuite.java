@@ -8,7 +8,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
   MatchTennisTest.class,
   JoueurTennisTest.class,
-  JoueurHandballTest.class
+  JoueurHandballTest.class,
+  MatchHandballTest.class,
+  TraitementSportTest.class
 })
 
 public class JunitTestSuite {
