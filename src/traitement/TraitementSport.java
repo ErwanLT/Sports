@@ -1,15 +1,13 @@
 package traitement;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -27,32 +25,32 @@ public class TraitementSport {
 
 		
 		StringBuilder resultat = new StringBuilder();
-		InputStreamReader ipsr;
 		try {
-			ipsr = new InputStreamReader(new FileInputStream(fichier));
-			BufferedReader br=new BufferedReader(ipsr);
-			String ligne;
 			
-			List<String> listJoueur = new ArrayList<>();
+			List<String> fileContent = FileUtils.readLines(fichier);
+
 			MatchTennis matchTennis = new MatchTennis();
 			JoueurTennis athlete1 = new JoueurTennis();
 			JoueurTennis athlete2 = new JoueurTennis();
 			
 			Set<String> set = new HashSet<String>() ;
-			while((ligne=br.readLine())!=null){
-				listJoueur.add(ligne);
-			}
-	        set.addAll(listJoueur) ;
+	        set.addAll(fileContent) ;
 	        ArrayList<String> distinctListNomJoueur = new ArrayList<String>(set) ;
-	        if(distinctListNomJoueur.size() == 2){
+	        if(distinctListNomJoueur.size() == 1){
+	        	resultat.append("Il n'y a qu'un seul joueur ayant marqué des points").append("\nLe deuxième joueur sera donc nommé Perdant");
+	        	athlete1.setNom(distinctListNomJoueur.get(0).toString());
+	        	athlete2.setNom("Perdant");
+	        }else if(distinctListNomJoueur.size() == 2){
 	        	athlete1.setNom(distinctListNomJoueur.get(0).toString());
 	        	athlete2.setNom(distinctListNomJoueur.get(1).toString());
+	        }else if(distinctListNomJoueur.size() > 2){
+	        	return resultat.append("revoyer le format du ficheir, il y'a plus de 2 nom différents").toString();
 	        }
 
 			matchTennis.setJoueur1(athlete1);
 			matchTennis.setJoueur2(athlete2);
 			
-			match : for(String nom : listJoueur){
+			match : for(String nom : fileContent){
 				if(athlete1.getNom().equals(nom)){
 					 matchTennis.setScoreJoueur1(matchTennis.getScoreJoueur1()+1);					
 				} else if (athlete2.getNom().equals(nom)){
@@ -64,7 +62,6 @@ public class TraitementSport {
 					break match;
 				}
 			}
-			br.close(); 
 			
 		} catch (IOException e) {
 			e.printStackTrace();

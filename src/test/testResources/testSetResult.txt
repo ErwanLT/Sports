@@ -1,44 +1,49 @@
-0 - 15
-0 - 30
-0 - 40
-Jeu gagné par : DJOKOVIK
+15 - 0
+30 - 0
+30 - 15
+40 - 15
+Jeu gagné par : DJOKOVIC
 Score : 
-0 jeu à 1 pour DJOKOVIK
-
-0 - 15
-0 - 30
-0 - 40
-Jeu gagné par : DJOKOVIK
-Score : 
-0 jeu à 2 pour DJOKOVIK
-
-0 - 15
-0 - 30
-0 - 40
-Jeu gagné par : DJOKOVIK
-Score : 
-0 jeu à 3 pour DJOKOVIK
-
-0 - 15
-0 - 30
-0 - 40
-Jeu gagné par : DJOKOVIK
-Score : 
-0 jeu à 4 pour DJOKOVIK
-
-0 - 15
-0 - 30
-0 - 40
-Jeu gagné par : DJOKOVIK
-Score : 
-0 jeu à 5 pour DJOKOVIK
-
-0 - 15
-0 - 30
-0 - 40
-Jeu gagné par : DJOKOVIK
-Score : 
-0 jeu à 6 pour DJOKOVIK
-Set gagné par : DJOKOVIK
+1 jeu à 0 pour DJOKOVIC
 
 15 - 0
+30 - 0
+30 - 15
+40 - 15
+Jeu gagné par : DJOKOVIC
+Score : 
+2 jeu à 0 pour DJOKOVIC
+
+15 - 0
+30 - 0
+30 - 15
+40 - 15
+Jeu gagné par : DJOKOVIC
+Score : 
+3 jeu à 0 pour DJOKOVIC
+
+15 - 0
+30 - 0
+30 - 15
+40 - 15
+Jeu gagné par : DJOKOVIC
+Score : 
+4 jeu à 0 pour DJOKOVIC
+
+15 - 0
+30 - 0
+30 - 15
+40 - 15
+Jeu gagné par : DJOKOVIC
+Score : 
+5 jeu à 0 pour DJOKOVIC
+
+15 - 0
+30 - 0
+30 - 15
+40 - 15
+Jeu gagné par : DJOKOVIC
+Score : 
+6 jeu à 0 pour DJOKOVIC
+Set gagné par : DJOKOVIC
+

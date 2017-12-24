@@ -12,12 +12,9 @@ import traitement.TraitementSport;
 
 public class TraitementSportTest {
 	
-	private String fichierTennisTest3 = "C://Users//Erwan//workspace//Sport//src//test//testResources//matchTennisComplet.txt";
-	
-	private String fichierTennisTest1 = "C://Users//Erwan//workspace//Sport//src//test//testResources//testJeu.txt";
-	
+	private String fichierTennisTest3 = "C://Users//Erwan//workspace//Sport//src//test//testResources//matchTennisComplet.txt";	
+	private String fichierTennisTest1 = "C://Users//Erwan//workspace//Sport//src//test//testResources//testJeu.txt";	
 	private String fichierTennisTest4 = "C://Users//Erwan//workspace//Sport//src//test//testResources//testSetComplet.txt";
-	
 	private String fichierHandballTest = "C://Users//Erwan//workspace//Sport//src//test//testResources//matchHandball.xlsx";
 	
 	private String fichierTennisTestResult1 = "C://Users//Erwan//workspace//Sport//src//test//testResources//testJeuResult.txt";
@@ -42,7 +39,7 @@ public class TraitementSportTest {
 	@Test
 	public void testTraitementTennisSet() throws IOException{
 		String resultat = TraitementSport.traitementTennis(new File(fichierTennisTest4));
-		File file = new File(fichierTennisTestResult2);		
+		File file = new File(fichierTennisTestResult2);	
 		String expectedResult = FileUtils.readFileToString(file);
 	
 		assertEquals(expectedResult, resultat);
@@ -51,7 +48,7 @@ public class TraitementSportTest {
 	@Test
 	public void testTraitementTennisMatchComplet() throws IOException{
 		String resultat = TraitementSport.traitementTennis(new File(fichierTennisTest3));
-		File file = new File(fichierTennisTestResult3);		
+		File file = new File(fichierTennisTestResult3);
 		String expectedResult = FileUtils.readFileToString(file);
 	
 		assertEquals(expectedResult, resultat);

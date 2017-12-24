@@ -109,11 +109,11 @@ public class MatchTennis extends SportIndividuel{
 		int nombreSetTotal = joueur1.getNombreSet() + joueur2.getNombreSet();
 		if(nombreSetTotal >= 3 && joueur1.getNombreSet()>= joueur2.getNombreSet()+2){
 			this.setEstTermine(true);
-			return "match gagné par : " + joueur1.getNom()+"\n";
+			return "\nmatch gagné par : " + joueur1.getNom();
 		}
 		if(nombreSetTotal >= 3 && joueur2.getNombreSet()>= joueur1.getNombreSet()+2){
 			this.setEstTermine(true);
-			return "match gagné par : " + joueur2.getNom()+"\n";
+			return "\nmatch gagné par : " + joueur2.getNom();
 		}
 		return "";
 	}
