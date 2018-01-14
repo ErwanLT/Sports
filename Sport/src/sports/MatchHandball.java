@@ -8,6 +8,7 @@ import constante.SportConstante;
 
 public class MatchHandball extends SportEquipe {
 	
+	/** nom du sport **/
 	private static final String NOM_SPORT = SportConstante.HANDBALL;
 	
 	private int scoreEquipe1;
