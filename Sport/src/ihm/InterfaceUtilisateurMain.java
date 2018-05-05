@@ -18,14 +18,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import constante.FichierConstante;
 import constante.SportConstante;
 import traitement.TraitementSport;
 
 @SuppressWarnings("serial")
 public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 
+	
+	
 	static private final String newline = "\n";
-	JButton openButton, traitementButton;
+	JButton openButton, traitementButton, exportButton;
 	JTextArea log;
 	JFileChooser choixFichier;
 	JTextField cheminFichier;
@@ -46,8 +49,6 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 
 		//Create a file chooser
 		choixFichier = new JFileChooser();
-		/*FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers texte.", "txt");
-		choixFichier.setFileFilter(filtre);*/
 		choixFichier.setAcceptAllFileFilterUsed(false);
 		choixFichier.setDialogTitle("Importation fichier match");
 
@@ -55,7 +56,7 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 		cheminFichier.setColumns(30);
 
 		//Create the open button.
-		openButton = new JButton("Open a File...");
+		openButton = new JButton("Ouvrir un fichier...");
 		openButton.addActionListener(this);
 
 		//For layout purposes, put the buttons in a separate panel
@@ -69,8 +70,11 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 		
 		traitementButton = new JButton("Calculer Score");
 		traitementButton.addActionListener(this);
+		exportButton = new JButton("export structure fichier");
+		exportButton.addActionListener(this);
 		JPanel panelTraitement = new JPanel();
 		panelTraitement.add(traitementButton);
+		panelTraitement.add(exportButton);
 
 		//Add the buttons and the log to this panel.
 		add(buttonPanel, BorderLayout.PAGE_START);
@@ -134,8 +138,9 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 				}
 			} else {
 				log.append("merci de selectionner un fichier"+newline);
-			}
-			
+			}			
+		} else if(e.getSource() == exportButton){
+			ExportStructureIHM.main(null);
 		}
 		
 
@@ -144,14 +149,14 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 	private void lancerTraitement() {
 		switch(listeDeroulanteSport.getSelectedItem().toString()){
 			case "Tennis" :
-				if(".txt".equals(getExtensionFile())){
+				if(FichierConstante.TXT.equals(getExtensionFile())){
 					log.append(TraitementSport.traitementTennis(fichier) + newline);
 				} else {
 					log.append("mauvais format de fichier, selectionn� un fichier .txt");
 				}
 				break;
 			case "Handball":
-				if(".xls".equals(getExtensionFile()) || ".xlsx".equals(getExtensionFile())){
+				if(FichierConstante.XLS.equals(getExtensionFile()) || FichierConstante.XLSX.equals(getExtensionFile())){
 					log.append(TraitementSport.traitementHandball(fichier) + newline);
 				} else {
 					log.append("mauvais format de fichier, selectionn� un fichier .xls ou .xlsx");

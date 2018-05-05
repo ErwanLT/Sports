@@ -10,7 +10,7 @@ import org.junit.runners.Suite;
   JoueurTennisTest.class,
   JoueurHandballTest.class,
   MatchHandballTest.class,
-  TraitementSportTest.class
+  ReadPropertiesTest.class
 })
 
 public class JunitTestSuite {
