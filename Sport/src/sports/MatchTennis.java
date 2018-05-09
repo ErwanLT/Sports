@@ -5,6 +5,11 @@ import athlete.JoueurTennis;
 import constante.SportConstante;
 import constante.TennisConstante;
 
+/**
+ * classe décrivant un match de tennis
+ * @author Erwan
+ *
+ */
 public class MatchTennis extends SportIndividuel{
 	
 	public MatchTennis() {
@@ -105,6 +110,11 @@ public class MatchTennis extends SportIndividuel{
 		return traiterPoint(score1) + " - " + traiterPoint(score2);
 	}
 
+	/**
+	 * méthode qui analyse si le match est terminé ou non
+	 * @return si le match n'est pas terminé: chaine vide<br>
+	 * si le match est terminé : le nom du gagnant
+	 */
 	private String estMatchTermine() {
 		int nombreSetTotal = joueur1.getNombreSet() + joueur2.getNombreSet();
 		if(nombreSetTotal >= 3 && joueur1.getNombreSet()>= joueur2.getNombreSet()+2){
@@ -118,6 +128,11 @@ public class MatchTennis extends SportIndividuel{
 		return "";
 	}
 
+	/**
+	 * traitement du set en cours
+	 * @return si le set n'est pas terminé chaine vide<br>
+	 * si le set est terminé le nom du joueur ayant gagné ce dernier
+	 */
 	private String traitementSet() {
 		if(estSetGagneJoueur1(joueur1.getNombreJeu(), joueur2.getNombreJeu())){
 			joueur1.setNombreJeu(0);
@@ -134,6 +149,12 @@ public class MatchTennis extends SportIndividuel{
 		return "";
 	}
 	
+	/**
+	 * méthode permettant de savoir si le joueur 2 à gagné le set en cours
+	 * @param nombreJeuJoueur1 nombre de jeu du set gagné par le joueur 1
+	 * @param nombreJeuJoueur2 nombre de jeu du set gagné par le joueur 2
+	 * @return true / false
+	 */
 	private boolean estSetGagneJoueur2(int nombreJeuJoueur1, int nombreJeuJoueur2) {
 		if(nombreJeuJoueur2 >= 6 && nombreJeuJoueur2 >= nombreJeuJoueur1+2){
 			return true;
@@ -141,6 +162,12 @@ public class MatchTennis extends SportIndividuel{
 		return false;
 	}
 
+	/**
+	 * méthode permettant de savoir si le joueur 1 à gagné le set en cours
+	 * @param nombreJeuJoueur1 nombre de jeu du set gagné par le joueur 1
+	 * @param nombreJeuJoueur2 nombre de jeu du set gagné par le joueur 2
+	 * @return true / false
+	 */
 	private boolean estSetGagneJoueur1(int nombreJeuJoueur1, int nombreJeuJoueur2) {
 		if(nombreJeuJoueur1 >= 6 && nombreJeuJoueur1 >= nombreJeuJoueur2+2){
 			return true;
@@ -157,6 +184,12 @@ public class MatchTennis extends SportIndividuel{
 		return false;
 	}
 	
+	/**
+	 * méthode qui permet de savoir si le jeu est gagnat
+	 * @param score1 score du joueur 1
+	 * @param score2 score du joueur 2
+	 * @return true / false
+	 */
 	public boolean estJeuGagnant(int score1, int score2) {
 		if(score2 >= 4 && score2 >= score1 + 2 
 				|| score1 >= 4 && score1 >= score2 + 2){
@@ -173,6 +206,12 @@ public class MatchTennis extends SportIndividuel{
 		return false;
 	}
 
+	/**
+	 * permet de savoir si un des joueur à l'avantage
+	 * @param score1 score du joueur 1
+	 * @param score2 score du joueur 2
+	 * @return true / false
+	 */
 	public boolean avantage(int score1, int score2) {
 		if (score2 >= 4 && score2 == score1 + 1
 				|| score1 >= 4 && score1 == score2 + 1){
@@ -191,6 +230,12 @@ public class MatchTennis extends SportIndividuel{
 		}
 	}
 
+	/**
+	 * match tennis : <br>
+	 * 1 = 15<br>
+	 * 2 = 30<br>
+	 * 3 = 40
+	 */
 	@Override
 	public String traiterPoint(int point) {
 		switch (point) {

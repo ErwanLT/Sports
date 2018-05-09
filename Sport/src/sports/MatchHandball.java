@@ -6,6 +6,11 @@ import java.util.List;
 import athlete.JoueurHandball;
 import constante.SportConstante;
 
+/**
+ * Classe décrivant un match de handball
+ * @author Erwan
+ *
+ */
 public class MatchHandball extends SportEquipe {
 	
 	/** nom du sport **/
@@ -46,9 +51,9 @@ public class MatchHandball extends SportEquipe {
 	@Override
 	protected String equipeAvecPlusHautScore(int scoreJoueur1, int scoreJoueur2) {
 		if (scoreEquipe1 > scoreEquipe2) {
-			return "l'�quipe 1 � le plus haut score";
+			return "l'équipe 1  à le plus haut score";
 		} else {
-			return "l'�quipe 2 � le plus haut score";
+			return "l'équipe 2  à le plus haut score";
 		}
 	}
 
