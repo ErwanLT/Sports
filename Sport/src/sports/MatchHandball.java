@@ -40,6 +40,7 @@ public class MatchHandball extends SportEquipe {
 		this.equipe2 = equipe2;
 	}
 	
+	@Override
 	public String getNomSport() {
 		return NOM_SPORT;
 	}

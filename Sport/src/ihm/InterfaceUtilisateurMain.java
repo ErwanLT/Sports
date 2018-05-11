@@ -27,8 +27,10 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 
 	
 	
-	static private final String newline = "\n";
-	JButton openButton, traitementButton, exportButton;
+	static private final String NEWLINE = "\n";
+	JButton openButton;
+	JButton traitementButton;
+	JButton exportButton;
 	JTextArea log;
 	JFileChooser choixFichier;
 	JTextField cheminFichier;
@@ -114,31 +116,9 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//Handle open button action.
 		if (e.getSource() == openButton) {
-			int returnVal = choixFichier.showOpenDialog(InterfaceUtilisateurMain.this);
-
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				fichier = choixFichier.getSelectedFile();
-				if(fichier.isDirectory()){
-					log.append("Erreur, il s'agit d'un répetoire." + newline);
-				} else {
-					cheminFichier.setText(fichier.getPath());
-				}				
-			} else {
-				log.append("Opération annulée par l'utilisateur." + newline);
-			}
-			log.setCaretPosition(log.getDocument().getLength());
+			actionOpen();
 		} else if(e.getSource() == traitementButton){
-			log.setText("");
-			if(!cheminFichier.getText().equals("")){
-				if(!listeDeroulanteSport.getSelectedItem().toString().equals("")){
-					log.append("début traitement calcul des scores ..." + newline);
-					lancerTraitement();
-				} else {
-					log.append("merci de selectionner un sport avant d'essayer de lancer un traitement" + newline);
-				}
-			} else {
-				log.append("merci de selectionner un fichier"+newline);
-			}			
+			actionTraiter();			
 		} else if(e.getSource() == exportButton){
 			ExportStructureIHM.main(null);
 		}
@@ -146,18 +126,48 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 
 	}
 
+	private void actionTraiter() {
+		log.setText("");
+		if(!cheminFichier.getText().equals("")){
+			if(!listeDeroulanteSport.getSelectedItem().toString().equals("")){
+				log.append("début traitement calcul des scores ..." + NEWLINE);
+				lancerTraitement();
+			} else {
+				log.append("merci de selectionner un sport avant d'essayer de lancer un traitement" + NEWLINE);
+			}
+		} else {
+			log.append("merci de selectionner un fichier"+NEWLINE);
+		}
+	}
+
+	private void actionOpen() {
+		int returnVal = choixFichier.showOpenDialog(InterfaceUtilisateurMain.this);
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			fichier = choixFichier.getSelectedFile();
+			if(fichier.isDirectory()){
+				log.append("Erreur, il s'agit d'un répetoire." + NEWLINE);
+			} else {
+				cheminFichier.setText(fichier.getPath());
+			}				
+		} else {
+			log.append("Opération annulée par l'utilisateur." + NEWLINE);
+		}
+		log.setCaretPosition(log.getDocument().getLength());
+	}
+
 	private void lancerTraitement() {
 		switch(listeDeroulanteSport.getSelectedItem().toString()){
 			case "Tennis" :
 				if(FichierConstante.TXT.equals(getExtensionFile())){
-					log.append(TraitementSport.traitementTennis(fichier) + newline);
+					log.append(TraitementSport.traitementTennis(fichier) + NEWLINE);
 				} else {
 					log.append("mauvais format de fichier, selectionn� un fichier .txt");
 				}
 				break;
 			case "Handball":
 				if(FichierConstante.XLS.equals(getExtensionFile()) || FichierConstante.XLSX.equals(getExtensionFile())){
-					log.append(TraitementSport.traitementHandball(fichier) + newline);
+					log.append(TraitementSport.traitementHandball(fichier) + NEWLINE);
 				} else {
 					log.append("mauvais format de fichier, selectionn� un fichier .xls ou .xlsx");
 				}
@@ -169,11 +179,7 @@ public class InterfaceUtilisateurMain extends JPanel implements ActionListener{
 	}
 
 	private Object getExtensionFile() {
-		String nomFichier = fichier.getName();
-		String ext = nomFichier.substring(nomFichier.lastIndexOf("." ));
-
-		
-		return ext;
+		return fichier.getName().substring(fichier.getName().lastIndexOf('.'));
 	}
 
 }

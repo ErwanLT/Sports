@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,14 +13,13 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import constante.FichierConstante;
-import constante.SportConstante;
 import traitement.TraitementExport;
 
 @SuppressWarnings("serial")
 public class ExportStructureIHM extends JPanel implements ActionListener {
 	
-	JButton tennisButton, handBallButton;
+	JButton tennisButton;
+	JButton handBallButton;
 	JTextArea log;
 	
 	public ExportStructureIHM() {
@@ -50,16 +48,12 @@ public class ExportStructureIHM extends JPanel implements ActionListener {
 			public void run() {
 				//Turn off metal's use of bold fonts
 				UIManager.put("swing.boldMetal", Boolean.FALSE); 
-				try {
-					creationEtRendreVisibleFenetre();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				creationEtRendreVisibleFenetre();
 			}
 		});
 	}
 
-	private static void creationEtRendreVisibleFenetre() throws IOException {
+	private static void creationEtRendreVisibleFenetre() {
 		//Create and set up the window.
 		JFrame frame = new JFrame("Export fichiers");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
